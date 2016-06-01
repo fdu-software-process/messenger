@@ -3,13 +3,13 @@
  * <ds303077135@gmail.com>
  */
 
-const Pool     = require('./pool');
-const Socket   = require('./socket');
+const Pool = require('./pool');
+const Socket = require('./socket');
 const Protocol = require('./protocol');
-const config   = require('./config');
+const config = require('./config');
 
-var message    = new Protocol(config.MAX_SOCKET_LEN);
-var mainPool   = new Pool();
+var message = new Protocol(config.MAX_SOCKET_LEN);
+var mainPool = new Pool();
 var mainSocket = new Socket(config.HOST, config.PORT);
 
 var users = [];
@@ -30,7 +30,9 @@ function onConnect() {
 
 function onDisconnect() {
     console.log('- Socket disconnect');
-    var user = users.filter(user => { return user.sid == this.id })[0];
+    var user = users.filter(user => {
+        return user.sid == this.id
+    })[0];
     if (user) {
         user.state = 0;
     }
@@ -40,7 +42,9 @@ function onDisconnect() {
 
 function onError() {
     console.log('- Socket error');
-    var user = users.filter(user => { return user.sid == this.id })[0];
+    var user = users.filter(user => {
+        return user.sid == this.id
+    })[0];
     if (user) {
         user.state = 0;
     }
@@ -53,12 +57,14 @@ function onData(data) {
     message.listener(this, data);
 }
 
-message.on('login', function (req, res, sid) {
-    var user = users.filter(u => { return u.name == req.content.name })[0];
+message.on('login', function(req, res, sid) {
+    var user = users.filter(u => {
+        return u.name == req.content.name
+    })[0];
     if (user && user.state) {
         // Still online, res with an err
         return res({
-            error:   1,
+            error: 1,
             message: 'ERROR: This user has already logged in.'
         });
     } else if (user) {
@@ -67,16 +73,16 @@ message.on('login', function (req, res, sid) {
     } else {
         // New user
         users.push({
-            name:  req.content.name,
+            name: req.content.name,
             state: 1,
-            sid:   sid
+            sid: sid
         });
     }
     res();
     syncUser();
 });
 
-message.on('msg', function (req, res) {
+message.on('msg', function(req, res) {
     res();
     mainPool.each(client => {
         message.push(client, {
