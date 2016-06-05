@@ -8,5 +8,16 @@
     "build": "babel *.js -d ../build-server && cp *.json ../build-server && enclose -x ../build-server/index.js && mv ../build-server/index ../SocketChatRoomServer && rm -rf ../build-server"
   },
   "author": "Shu Ding <ds303077135@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-3": "^6.5.0",
+    "babel-register": "^6.9.0"
+  },
+  "dependencies": {
+    "lodash": "^4.13.1",
+    "lowdb": "^0.13.0-beta-5",
+    "moment": "^2.13.0",
+    "utf8": "^2.1.1"
+  }
 }

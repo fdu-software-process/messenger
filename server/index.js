@@ -2,7 +2,10 @@
  * Created by shuding on 11/24/15.
  * <ds303077135@gmail.com>
  */
+require('babel-register');
+const db = require('./database');
 
+const records = db.get('records');
 const Pool = require('./pool');
 const Socket = require('./socket');
 const Protocol = require('./protocol');
@@ -84,6 +87,7 @@ message.on('login', function(req, res, sid) {
 
 message.on('msg', function(req, res) {
     res();
+    db.save_record(req.content);
     mainPool.each(client => {
         message.push(client, {
             type: 'msg',

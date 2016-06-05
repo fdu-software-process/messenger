@@ -79,13 +79,13 @@ function mainCtrl($scope, $sce) {
         }, 800);
     });
     ipc.on('push', function (event, data) {
-    	console.log(data);
         switch (data.content.type) {
             case 'syncuser':
                 $scope.userList = data.content.data;
                 $scope.$apply();
                 break;
             case 'msg':
+                console.log(JSON.stringify(data.content.data));
                 $scope.handleMsg(data.content.data);
         }
     });

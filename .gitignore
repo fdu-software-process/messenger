@@ -4,6 +4,8 @@ client/app.js
 client/protocol.js
 client/socket.js
 
+server/db.json
+
 npm-debug.log
 db.json
 .DS_Store
