@@ -1,6 +1,6 @@
 # Messenger
 
-With the help of Shu Ding's original project [socket-chat-room](quietshu/socket-chat-room), I am trying to make it evolve it a pluggable and modular starter for many courses in CS/SS major. Stay tuned.
+With the help of Shu Ding's original project [socket-chat-room](quietshu/socket-chat-room), I am trying to make it evolve into a pluggable and modular starter for many courses in CS/SS major. Stay tuned.
 
 ## Demo
 
